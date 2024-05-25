@@ -6,7 +6,7 @@
  * @Date: 2024-05-23 09:34:53
  * @Author: FeeLinear 444730413@qq.com
  * @LastEditors: FeeLinear 444730413@qq.com
- * @LastEditTime: 2024-05-25 16:46:37
+ * @LastEditTime: 2024-05-25 18:34:34
  */
 ;(function () {
   
@@ -20,27 +20,51 @@
     if(typeof param2 === "function"){
       this.callback = param2;
     }
+    if(options){
+      Object.keys(options).forEach(key => { // 二级拷贝
+        if(typeof options[key] === "object"){
+          options[key] = Object.assign(this.defaultOptions[key], options[key])
+        }
+      })
+    }
     this.options = Object.assign(this.defaultOptions, options);
+    if(!this.options.bgColor){
+      this.options.bgColor = this.options.theme === "dark" ? "#060000" : "#cfecfe";
+    }
+    if(!this.options.bgUrl){
+      this.options.bgUrl = `https://feelinear.github.io/page-loading/images/loading-bg-${this.options.theme}.jpg`;
+    }
+    if(!this.options.logo.url){
+      this.options.logo.url = "https://feelinear.github.io/page-loading/images/logo.png";
+    }
+    if(!this.options.wave.url){
+      this.options.wave.url = "https://feelinear.github.io/page-loading/images/wave-mixin.png";
+    }
+    if(!this.options.container.url){
+      this.options.container.url = `https://feelinear.github.io/page-loading/images/loading-ball-${this.options.theme}.png`;
+    }
     this.options.wave.height = parseInt(this.options.container.height) * 6 / 5;
     this.init();
   }
   PageLoading.prototype = {
     defaultOptions: {
-      bgImageUrl: "https://feelinear.github.io/page-loading/images/loading-bg-gxblackgold.jpg",
-      bgColor: "#060000",
+      theme: "light", // dark
+      bgUrl: "",
+      bgColor: "",
       logo: {
-        url: "https://feelinear.github.io/page-loading/images/logo.png",
-        width: "132px",
-        height: "76px",
+        url: "",
+        width: "100px",
+        height: "100px",
+        opacity: 1,
       },
       wave: {
-        url: "https://feelinear.github.io/page-loading/images/wave-mixin.png",
+        url: "",
         opacity: 1,
         speed: 50,
         flatness: 4,
       },
       container: {
-        url: "https://feelinear.github.io/page-loading/images/loading-ball-gxblackgold.png",
+        url: "",
         width: "250px",
         height: "250px",
         top: "50%",
@@ -67,7 +91,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: url(${this.options.bgImageUrl}) no-repeat center ${this.options.bgColor};
+        background: url(${this.options.bgUrl}) no-repeat center ${this.options.bgColor};
         background-size: 100% 100%;
       }
       .loading-box{
@@ -90,13 +114,14 @@
         display: flex;
         top: 0;
         left:0;
+        opacity: ${this.options.logo.opacity};
         color: ${this.options.process.color};
-        ${this.options.logo ? "background: url(" + this.options.logo.url + ") no-repeat center;":""}
-        background-size: ${this.options.logo && this.options.logo.width} ${this.options.logo && this.options.logo.height};
+        ${this.options.logo.url ? "background: url(" + this.options.logo.url + ") no-repeat center;":""}
+        background-size: ${this.options.logo.width} ${this.options.logo.height};
         z-index: 3;
       }
       .process-box{
-        display: ${this.options.logo?"none":"block"};
+        display: ${this.options.logo.url?"none":"block"};
         margin: auto;
         white-space: nowrap;
       }
@@ -160,7 +185,8 @@
           <div style="display:none;">
             <img src="${this.options.wave.url}" importance="high" />
             <img src="${this.options.container.url}" importance="high" />
-            <img src="${this.options.bgImageUrl}" importance="high" />
+            <img src="${this.options.logo && this.options.logo.url}" importance="high" />
+            <img src="${this.options.bgUrl}" importance="high" />
           </div>
         </div>
         <div class="loading-box">
