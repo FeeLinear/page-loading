@@ -6,7 +6,7 @@
  * @Date: 2024-05-23 09:34:53
  * @Author: FeeLinear 444730413@qq.com
  * @LastEditors: FeeLinear 444730413@qq.com
- * @LastEditTime: 2024-05-27 14:10:08
+ * @LastEditTime: 2024-05-27 15:44:57
  */
 ;(function () {
   
@@ -43,7 +43,7 @@
     if(this.options.container.url  === undefined){
       this.options.container.url = `https://feelinear.github.io/page-loading/images/loading-ball-${this.options.theme}.png`;
     }
-    this.options.animation.height = parseInt(this.options.container.height) * 6 / 5;
+    this.options.animation.height = parseInt(this.options.container.height) * 6 / 5 + "px";
     this.init();
   }
   PageLoading.prototype = {
@@ -120,9 +120,9 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        background: url(./images/loading-ring.png) no-repeat center;
+        background: url(${this.options.animation.url}) no-repeat center;
         background-size: 100% 100%;
-        animation: rotate 2s linear infinite;
+        animation: rotate ${5.1 - this.options.animation.speed / 20}s linear infinite;
       }
       .ball-center{
         position: absolute;
@@ -153,10 +153,10 @@
       .wave-container{
         position: relative;
         width: ${this.options.animation.flatness * 500}px;
-        height: ${this.options.animation.height}px;
+        height: ${this.options.animation.height};
         opacity: ${this.options.animation.opacity};
         transition: all 100ms linear;
-        transform: translateY(${this.options.animation.height}px);
+        transform: translateY(${this.options.container.height});
       }
       .wave-move{
         position: absolute;
@@ -332,7 +332,7 @@
       if(!this.waveContainer) this.waveContainer = document.querySelector("#wave-container");
       this.process = Math.max(0, (this.sourceNum - 1)) * 10 + this.timerProcess;
       this.process = Math.min(this.process, 100);
-      this.waveContainer && (this.waveContainer.style.transform = `translateY(${this.options.animation.height / 100 * (100-this.process)}px)`);
+      this.waveContainer && (this.waveContainer.style.transform = `translateY(${parseInt(this.options.container.height) / 100 * (100-this.process)}px)`);
       this.processDom && (this.processDom.innerHTML = this.process);
       this.barCover && (this.barCover.style.transform = `translateX(${this.process}%)`);
       if (this.timerProcess >= maxNum) {
