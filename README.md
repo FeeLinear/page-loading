@@ -2,19 +2,21 @@
  * @Author: FeeLinear 444730413@qq.com
  * @Date: 2024-05-22 18:44:48
  * @LastEditors: FeeLinear 444730413@qq.com
- * @LastEditTime: 2024-05-27 16:27:14
+ * @LastEditTime: 2024-05-27 16:46:16
  * @FilePath: \page-loading\README.md
  * @Description:
 -->
 
 # Preview:
 
-## loading1: https://feelinear.github.io/page-loading/index.html
+## loading: https://feelinear.github.io/page-loading/index.html
 
 # 引用说明
 
 1，直接下载 page-loading.js 文件；
+
 2, 将需要的图片资源文件下载项目本地，使用配置地址替换默认引用；默认的引用是 github 上的资源 (外网资源不稳定)；
+
 3，引用请放在 body 标签最顶部，否则不能达到预想效果；
 
 ```html
