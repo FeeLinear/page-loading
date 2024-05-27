@@ -6,7 +6,7 @@
  * @Date: 2024-05-23 09:34:53
  * @Author: FeeLinear 444730413@qq.com
  * @LastEditors: FeeLinear 444730413@qq.com
- * @LastEditTime: 2024-05-25 18:34:34
+ * @LastEditTime: 2024-05-27 09:37:47
  */
 ;(function () {
   
@@ -34,7 +34,7 @@
     if(!this.options.bgUrl){
       this.options.bgUrl = `https://feelinear.github.io/page-loading/images/loading-bg-${this.options.theme}.jpg`;
     }
-    if(!this.options.logo.url){
+    if(this.options.logo.show && !this.options.logo.url){
       this.options.logo.url = "https://feelinear.github.io/page-loading/images/logo.png";
     }
     if(!this.options.wave.url){
@@ -52,6 +52,7 @@
       bgUrl: "",
       bgColor: "",
       logo: {
+        show: true,
         url: "",
         width: "100px",
         height: "100px",
