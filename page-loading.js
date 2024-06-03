@@ -6,7 +6,7 @@
  * @Date: 2024-05-23 09:34:53
  * @Author: FeeLinear 444730413@qq.com
  * @LastEditors: FeeLinear 444730413@qq.com
- * @LastEditTime: 2024-05-27 15:44:57
+ * @LastEditTime: 2024-06-03 10:19:05
  */
 ;(function () {
   
@@ -373,8 +373,8 @@
     endLoadingTimer() {
       window._clearInterval(this.timer);
       window._setTimeout(function () {
-        const loadingContainer = document.querySelector("#loading-container");
-        loadingContainer && document.body.removeChild(loadingContainer);
+        // const loadingContainer = document.querySelector("#loading-container");
+        // loadingContainer && document.body.removeChild(loadingContainer);
       }, 100);
     },
   };
