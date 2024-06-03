@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN" id="htmlRoot">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-control" content="no-cache" />
+    <meta http-equiv="Cache" content="no-cache" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-control" content="no-cache" />
+    <meta http-equiv="Cache" content="no-cache" />
+    <link rel="icon" href="<%= BASE_URL %>basic-img-logo-dan.svg" />
+    <title><%= process.env.VUE_APP_PRO_NAME %></title>
+    <link rel="preload" href="/micro_apps.js" as="script" />
+    <script src="/micro_apps.js"></script>
+    <!-- inject cdn js -->
+    <% if (htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.scripts) { %> <% for(var
+    js of htmlWebpackPlugin.options.cdn.scripts) { %>
+    <link rel="preload" href="<%=js%>" as="script" />
+    <% } %> <% for(var js of htmlWebpackPlugin.options.cdn.scripts) { %>
+    <script src="<%=js%>"></script>
+    <% } %> <% } %>
+    <style>
+      .slogan-title{
+        position: absolute;
+        z-index: 2;
+        font-size: 44px;
+        font-family: "microsoft Yahei";
+        white-space: nowrap;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-image: linear-gradient(to bottom, #457AD5, #45b8d5);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .slogan-title span{
+        margin: 0 30px;
+        letter-spacing: 10px;
+      }
+      .slogan-word{
+        position: absolute;
+        z-index: 2;
+        font-size: 26px;
+        color: #667584;
+        font-family: "microsoft Yahei";
+        bottom: 18%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .tips-bot{
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2;
+        font-size: 18px;
+        color: #ACB8CB;
+        font-family: "microsoft Yahei";
+        padding: 10px 40px;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.66) 66%, transparent);
+      }
+      .tips-bot::before, .tips-bot::after{
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        top: 0;
+        background: linear-gradient(to right, transparent, #fff 20%, #fff 80%, transparent);
+        z-index: 3;
+        transform: scaleY(0.75);
+      }
+      .tips-bot::after{
+        top: unset;
+        bottom: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script src="./page-loading.js" type="text/javascript"></script>
+    <script>
+      // 设置默认主题
+      const defaultTheme = 'gxbluewhite';
+      let theme = window.localStorage.getItem('__APP__DARK__MODE__');
+      if (!theme) {
+        theme = defaultTheme;
+        window.localStorage.setItem('__APP__DARK__MODE__', theme);
+      }
+      // loading
+      const loadingThemeMap = {
+        gxbluewhite: "light",
+        gxblackgold: "dark",
+      }
+      const loadTheme = loadingThemeMap[theme];
+      const options = {
+        theme: loadTheme,
+        logo: {
+          width: "132px",
+          height: "76px",
+        },
+      }
+      if(theme === "gxblackgold"){
+        options.process = {
+          color: "#ECBE77",
+          bgColor: "#A69E93",
+          activeColor1: "#FFE2BC",
+          activeColor2: "#ECBE77",
+        }
+      }
+      new PageLoading(options, function(process){
+        if(process >= 100){
+          // const sloganBox = document.querySelector("#slogan-box");
+          // sloganBox && document.body.removeChild(sloganBox);
+        }
+      })
+    </script>
+    <noscript>
+      <strong
+        >We're sorry but vue-minimum doesn't work properly without JavaScript enabled. Please enable
+        it to continue.</strong
+      >
+    </noscript>
+    <div class="slogan-box" id="slogan-box">
+      <div class="slogan-title">
+        <span>创造价值</span>
+        <span>成就你我</span>
+        <span>服务社会</span>
+      </div>
+      <div class="slogan-word">欢迎使用机构通，系统正在加载中</div>
+      <div class="tips-bot">为了更流畅的产品体验，登录会消耗一些时间来生成数据，请耐心等候。</div>
+    </div>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  <!-- <script src="/libs/wwLogin-1.0.0.js"></script> -->
+</html>
